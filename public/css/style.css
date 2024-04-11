@@ -1,5 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&family=Kadwa:wght@400;700&display=swap");
+@import url(https://db.onlinewebfonts.com/c/0801c08e5412f54e4b4e9ad146d83a12?family=Ink+Free);
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+:root {
+  --color-1: #070f2b;
+  --color-2: #1b1a55;
+  --color-3: #535c91;
+  --color-4: #9290c3;
+  --color-5: #3f3ff4;
+  --color-6: #cf3030;
+}
+
+body {
+  font-family: "Kadwa", serif;
+  background-color: var(--color-1);
+  color: var(--color-4);
+}
+
+/* Pre - Loader Page */
+
+.loading-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--color-1);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+}
+
+#svg {
+  height: 150px;
+  width: 150px;
+  stroke: var(--color-4);
+  stroke-width: 3px;
+  fill-opacity: 0;
+  stroke-dasharray: 4500;
+  animation: draw 8s ease;
+}
+
+.logo-name {
+  color: var(--color-4);
+  font-size: 25px;
+  letter-spacing: 15px;
+  font-family: "Ink Free", cursive;
+  font-weight: 700;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 4500;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
 }
