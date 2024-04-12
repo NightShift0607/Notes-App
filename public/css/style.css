@@ -22,6 +22,47 @@ body {
   color: var(--color-4);
 }
 
+.main {
+  padding: 20px;
+}
+
+.container {
+  margin: 10px 0;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--color-4);
+  text-decoration: none;
+}
+
+.btn {
+  font-size: 1rem;
+  background-color: var(--color-4);
+  width: fit-content;
+  padding: 1px 15px;
+  border-radius: 40px;
+  color: var(--color-1);
+  cursor: pointer;
+  border: 3px solid var(--color-4);
+}
+
+.btn:hover {
+  filter: brightness(120%);
+}
+
+.btn > a {
+  color: var(--color-1);
+}
+
 /* Pre - Loader Page */
 
 .loading-page {
@@ -64,5 +105,178 @@ body {
 
   100% {
     stroke-dashoffset: 0;
+  }
+}
+
+/* Header */
+
+header {
+  padding: 10px;
+}
+
+nav {
+  padding: 5px 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  align-items: center;
+  grid-template-areas: "logo menu btn";
+  width: 100%;
+}
+
+.website-logo {
+  grid-area: logo;
+  display: flex;
+  justify-content: flex-start;
+  font-family: "Ink Free", cursive;
+  font-size: 2.2rem;
+  user-select: none;
+}
+
+.nav-el-container {
+  grid-area: menu;
+  display: flex;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.nav-el {
+  margin: 0 10px;
+}
+
+.nav-el:hover {
+  color: var(--color-5);
+}
+
+.login-container {
+  display: flex;
+  justify-content: flex-end;
+  grid-area: btn;
+}
+
+.signup {
+  background-color: var(--color-1);
+  border: 3px solid var(--color-4);
+  color: var(--color-4);
+  margin-right: 10px;
+}
+
+.signup > a {
+  color: var(--color-4);
+}
+
+/* Home Page */
+
+.home {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+}
+
+.align {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-container {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero > h1 {
+  font-family: "Just Me Again Down Here", cursive;
+  font-size: 4rem;
+  margin: 20px;
+  text-align: center;
+}
+
+.hero > #try {
+  margin: 20px 0;
+  font-size: 1.2rem;
+}
+
+/* Footer */
+
+footer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  width: 100%;
+}
+
+.logo {
+  width: 15px;
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Media Queries */
+
+@media only screen and (max-width: 550px) {
+  nav {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 20px;
+    grid-template-areas:
+      "logo btn"
+      "menu menu";
+  }
+
+  .website-logo {
+    font-size: 1.8rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+  }
+
+  .home {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 10px;
+    grid-template-areas:
+      "note1 note2"
+      "hero hero";
+  }
+
+  .note1 {
+    grid-area: note1;
+  }
+
+  .hero {
+    grid-area: hero;
+  }
+
+  .note2 {
+    grid-area: note2;
+  }
+
+  #try {
+    font-size: 1rem;
+  }
+
+  footer {
+    width: 60%;
+    margin: auto;
+  }
+
+  .logo {
+    height: 44px;
+    align-items: flex-start;
   }
 }

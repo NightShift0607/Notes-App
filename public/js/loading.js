@@ -21,3 +21,7 @@ gsap.fromTo(
     delay: 0.5,
   }
 );
+
+setInterval(() => {
+  document.querySelector(".loading-page").style.display = "none";
+}, 4600);
