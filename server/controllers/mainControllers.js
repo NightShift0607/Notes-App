@@ -1,5 +1,9 @@
 // Get Homepage
 
-exports.homepage = (req, res) => {
+exports.homePage = (req, res) => {
   res.render("index");
+};
+
+exports.aboutPage = (req, res) => {
+  res.render("about");
 };
