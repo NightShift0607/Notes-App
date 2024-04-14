@@ -7,3 +7,7 @@ exports.homePage = (req, res) => {
 exports.aboutPage = (req, res) => {
   res.render("about");
 };
+
+exports.signupPage = (req, res) => {
+  res.render("signup");
+};
