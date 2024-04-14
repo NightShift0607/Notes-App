@@ -34,6 +34,10 @@ body {
   align-items: center;
 }
 
+form {
+  width: 100%;
+}
+
 img {
   width: 100%;
   height: auto;
@@ -235,6 +239,18 @@ nav {
   margin: 0 40px;
 }
 
+/* Signup/Login */
+
+.form-container {
+  width: 400px;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 /* Footer */
 
 footer {
@@ -270,7 +286,7 @@ footer {
   }
 
   .btn {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 
   .home {
@@ -306,5 +322,20 @@ footer {
   .logo {
     height: 44px;
     align-items: flex-start;
+  }
+
+  #about {
+    width: 98%;
+    text-align: center;
+  }
+
+  .stack-container {
+    flex-direction: column;
+    align-items: center;
+    margin: 5px 0;
+  }
+
+  .stack {
+    margin: 5px 0;
   }
 }
