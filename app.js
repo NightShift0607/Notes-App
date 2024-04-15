@@ -1,8 +1,13 @@
+require("dotenv").config();
 const express = require("express");
 const expressLayout = require("express-ejs-layouts");
+const session = require("express-session");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
-require("dotenv").config();
+const cookieParser = require("cookie-parser");
+const flash = require("connect-flash");
+const mainRoutes = require("./server/routes/index");
+const authRoutes = require("./server/routes/auth");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -10,13 +15,26 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(cookieParser(process.env.COOKIE_SIGN));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 1000 * 60 * 60,
+    },
+  })
+);
+app.use(flash());
 
 // Templating Engine
 app.use(expressLayout);
 app.set("layout", "./layouts/main");
 app.set("view engine", "ejs");
 
-app.use("/", require("./server/routes/index"));
+app.use("/", mainRoutes);
+app.use("/", authRoutes);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);

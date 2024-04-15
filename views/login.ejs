@@ -1,10 +1,17 @@
 <div class="container">
   <div class="form-container">
-    <form action="/signup" method="post">
+    <form action="/signin" method="post">
       <h1>Sign In</h1>
-      <div class="error">Error Message</div>
+      <% if (error != '') { %>
+      <div class="error"><%= error %></div>
+      <% } %>
       <div class="input">
-        <input type="email" name="email" placeholder="Email" />
+        <input
+          type="text"
+          name="email"
+          placeholder="Email or Username"
+          minlength="6"
+        />
       </div>
       <div class="input">
         <input
@@ -12,6 +19,8 @@
           name="password"
           minlength="8"
           placeholder="Password"
+          pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+          title="Minimum Length of 8 characters. Please include at least 1 uppercase character, 1 lowercase character, and 1 number."
         />
       </div>
       <button type="submit" class="btn form-btn">Sign In</button>

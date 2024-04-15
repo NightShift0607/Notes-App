@@ -1,17 +1,21 @@
-// Get Homepage
-
+// Get - Homepage
 exports.homePage = (req, res) => {
   res.render("index");
 };
 
+// Get - About Page
 exports.aboutPage = (req, res) => {
   res.render("about");
 };
 
+// Get - Signup Page
 exports.signupPage = (req, res) => {
-  res.render("signup");
+  let error = req.flash("error");
+  res.render("signup", { error });
 };
 
+// Get - Login Page
 exports.loginPage = (req, res) => {
-  res.render("login");
+  let error = req.flash("error");
+  res.render("login", { error });
 };
