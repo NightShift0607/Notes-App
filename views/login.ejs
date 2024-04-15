@@ -2,8 +2,9 @@
   <div class="form-container">
     <form action="/signup" method="post">
       <h1>Sign In</h1>
+      <div class="error">Error Message</div>
       <div class="input">
-        <input type="email" name="email" placeholder="Email" required />
+        <input type="email" name="email" placeholder="Email" />
       </div>
       <div class="input">
         <input
@@ -11,7 +12,6 @@
           name="password"
           minlength="8"
           placeholder="Password"
-          required
         />
       </div>
       <button type="submit" class="btn form-btn">Sign In</button>

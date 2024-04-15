@@ -53,6 +53,10 @@ li {
   list-style: none;
 }
 
+button {
+  font-family: "Kadwa", serif;
+}
+
 .btn {
   font-size: 1rem;
   background-color: var(--color-4);
@@ -252,7 +256,18 @@ nav {
   flex-direction: column;
 }
 
-input {
+.error {
+  width: 100%;
+  background-color: #a24b4b;
+  color: #601515;
+  font-size: 1.1rem;
+  padding: 5px 0;
+  border-radius: 15px;
+  border: none;
+  margin: 5px 0;
+}
+
+.form-container input {
   width: 100%;
   font-size: 1.1rem;
   padding: 10px 15px;
@@ -262,9 +277,19 @@ input {
   margin: 5px 0;
   border-radius: 15px;
   color: var(--color-4);
+  outline: none;
+  transition: all 0.3s;
 }
 
-input::placeholder {
+.form-container input:focus {
+  border-bottom: 3px solid #55c57a;
+}
+
+.form-container input:focus:invalid {
+  border-bottom: 3px solid var(--color-6);
+}
+
+.form-container input::placeholder {
   color: var(--color-4);
 }
 
@@ -273,11 +298,11 @@ input::placeholder {
   justify-content: space-between;
 }
 
-.full-name > input:nth-of-type(1) {
+.form-container .full-name > input:nth-of-type(1) {
   margin-right: 2px;
 }
 
-.full-name > input:nth-of-type(2) {
+.form-container .full-name > input:nth-of-type(2) {
   margin-left: 2px;
 }
 
@@ -297,14 +322,9 @@ input::placeholder {
   cursor: pointer;
 }
 
-.form-btn:active,
-.google-btn:active,
+.btn:active,
 .image-file:active {
   transform: translateY(2px);
-}
-
-.form-btn {
-  padding: 7px 0;
 }
 
 .line hr {
