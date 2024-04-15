@@ -11,3 +11,7 @@ exports.aboutPage = (req, res) => {
 exports.signupPage = (req, res) => {
   res.render("signup");
 };
+
+exports.loginPage = (req, res) => {
+  res.render("login");
+};
