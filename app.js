@@ -8,6 +8,9 @@ const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
 const mainRoutes = require("./server/routes/index");
 const authRoutes = require("./server/routes/auth");
+const dashboardRoutes = require("./server/routes/dashboard");
+const connectDB = require("./server/config/db");
+const MongoStore = require("connect-mongo");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,12 +24,16 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URL,
+    }),
     cookie: {
       maxAge: 1000 * 60 * 60,
     },
   })
 );
 app.use(flash());
+connectDB();
 
 // Templating Engine
 app.use(expressLayout);
@@ -35,6 +42,7 @@ app.set("view engine", "ejs");
 
 app.use("/", mainRoutes);
 app.use("/", authRoutes);
+app.use("/", dashboardRoutes);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
