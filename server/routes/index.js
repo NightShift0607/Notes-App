@@ -7,5 +7,6 @@ router.get("/", mainControllers.homePage);
 router.get("/about", mainControllers.aboutPage);
 router.get("/signup", mainControllers.signupPage);
 router.get("/signin", mainControllers.loginPage);
+router.get("/forgot", mainControllers.forgotPage);
 
 module.exports = router;

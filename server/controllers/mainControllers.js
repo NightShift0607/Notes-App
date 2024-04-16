@@ -10,12 +10,19 @@ exports.aboutPage = (req, res) => {
 
 // Get - Signup Page
 exports.signupPage = (req, res) => {
-  let error = req.flash("error");
+  const error = req.flash("error");
   res.render("signup", { error });
 };
 
 // Get - Login Page
 exports.loginPage = (req, res) => {
-  let error = req.flash("error");
+  const error = req.flash("error");
   res.render("login", { error });
+};
+
+// Get - Forgot Page
+exports.forgotPage = (req, res) => {
+  const error = req.flash("error");
+  const forgot = req.flash("forgot");
+  res.render("forgot", { error, forgot });
 };
