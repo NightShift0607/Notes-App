@@ -10,7 +10,7 @@ const mainRoutes = require("./server/routes/index");
 const authRoutes = require("./server/routes/auth");
 const dashboardRoutes = require("./server/routes/dashboard");
 const connectDB = require("./server/config/db");
-const MongoStore = require("connect-mongo");
+// const MongoStore = require("connect-mongo");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -24,9 +24,9 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
-    store: MongoStore.create({
-      mongoUrl: process.env.MONGODB_URL,
-    }),
+    // store: MongoStore.create({
+    //   mongoUrl: process.env.MONGODB_URL,
+    // }),
     cookie: {
       maxAge: 1000 * 60 * 60,
     },
