@@ -1,3 +1,7 @@
 exports.dashboardPage = (req, res) => {
-  res.render("dashboard/dashboard");
+  if (req.isAuthenticated()) {
+    res.render("dashboard/dashboard");
+  } else {
+    res.status(401).send({ msg: "Unauthorized" });
+  }
 };

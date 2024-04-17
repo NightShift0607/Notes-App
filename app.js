@@ -6,11 +6,12 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
+const MongoStore = require("connect-mongo");
+const passport = require("passport");
 const mainRoutes = require("./server/routes/index");
 const authRoutes = require("./server/routes/auth");
 const dashboardRoutes = require("./server/routes/dashboard");
 const connectDB = require("./server/config/db");
-// const MongoStore = require("connect-mongo");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -24,14 +25,16 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
-    // store: MongoStore.create({
-    //   mongoUrl: process.env.MONGODB_URL,
-    // }),
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URL,
+    }),
     cookie: {
       maxAge: 1000 * 60 * 60,
     },
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
 connectDB();
 
