@@ -1,7 +1,6 @@
 const express = require("express");
 const multer = require("multer");
 const passport = require("passport");
-const bcrypt = require("bcrypt");
 const LocalStrategy = require("passport-local").Strategy;
 const router = express.Router();
 const authControllers = require("../controllers/authControllers");
