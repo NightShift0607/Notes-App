@@ -36,6 +36,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+// Connect to Database
 connectDB();
 
 // Templating Engine
@@ -43,6 +45,7 @@ app.use(expressLayout);
 app.set("layout", "./layouts/main");
 app.set("view engine", "ejs");
 
+// Routing
 app.use("/", mainRoutes);
 app.use("/", authRoutes);
 app.use("/", dashboardRoutes);

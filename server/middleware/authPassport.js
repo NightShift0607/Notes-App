@@ -38,12 +38,53 @@ passport.use(
   })
 );
 
-// Session Establishment
+// Google Passport Strategy
 
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: process.env.GOOGLE_CALLBACK_URL,
+    },
+    async function (accessToken, refreshToken, profile, cb) {
+      const newUser = {
+        userName: profile.displayName,
+        firstName: profile.name.givenName,
+        lastName: profile.name.familyName,
+        email: profile.emails[0].value,
+        password: profile.id,
+        profileImage: profile.photos[0].value,
+      };
+
+      try {
+        let user = await User.findOne({ password: newUser.password });
+        if (user) {
+          cb(null, user);
+        } else {
+          try {
+            user = await User.create(newUser);
+            cb(null, user);
+          } catch (error) {
+            cb(null, false, {
+              message:
+                "The email registered with google account already exists in our database! Please Login!",
+            });
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  )
+);
+
+// Persist user data after sucessful authentication
 passport.serializeUser((user, cb) => {
   cb(null, user.id);
 });
 
+// Retrive user data from session
 passport.deserializeUser(async (id, cb) => {
   const user = await User.findById(id);
   cb(null, user);

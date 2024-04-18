@@ -20,6 +20,20 @@ router.post(
   }
 );
 
+router.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["email", "profile"] })
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/dashboard",
+    failureFlash: true,
+    failureRedirect: "/signin",
+  })
+);
+
 router.get("/logout", authControllers.logout);
 
 module.exports = router;
