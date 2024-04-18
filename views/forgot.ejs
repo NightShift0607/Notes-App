@@ -12,7 +12,7 @@
       <button type="submit" class="btn form-btn">Verify</button>
     </form>
     <% } else if (forgot == 'reset') { %>
-    <form action="/reset-password?_method=PUT" method="post">
+    <form action="/reset-password?_method=PATCH" method="post">
       <h1>Change Password</h1>
       <% if (error != '') { %>
       <div class="error"><%= error %></div>
@@ -48,12 +48,7 @@
       <div class="error"><%= error %></div>
       <% } %>
       <div class="input">
-        <input
-          type="text"
-          name="username"
-          placeholder="Email or Username"
-          minlength="6"
-        />
+        <input type="email" name="email" placeholder="Email" />
       </div>
       <button type="submit" class="btn form-btn">Reset Password</button>
     </form>

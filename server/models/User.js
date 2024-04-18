@@ -28,6 +28,12 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    passwordResetToken: {
+      type: String,
+    },
+    passwordResetExpires: {
+      type: Date,
+    },
   },
   { timestamps: true }
 );

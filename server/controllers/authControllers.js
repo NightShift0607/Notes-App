@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 const saltRounds = 10;
 
 // Post - Sign Up
@@ -63,3 +64,35 @@ exports.logout = (req, res, cb) => {
     res.redirect("/signin");
   });
 };
+
+exports.forgotPassword = async (req, res, next) => {
+  // Getting User based on email posted
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    req.flash("error", "No account found with that Email address!");
+    return res.redirect("/forgot");
+  }
+
+  // Generating the random reset token saving it to database
+  const resetToken = crypto.randomBytes(32).toString("hex");
+
+  const passwordResetToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  console.log({ resetToken }, passwordResetToken);
+
+  const passwordResetExpires = Date.now() + 10 * 60 * 1000;
+  await User.findOneAndUpdate(
+    { _id: user._id },
+    {
+      passwordResetToken: passwordResetToken,
+      passwordResetExpires: passwordResetExpires,
+    }
+  );
+};
+
+exports.verifyToken = (req, res, next) => {};
+
+exports.resetPassword = (req, res, next) => {};

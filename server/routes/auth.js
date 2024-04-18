@@ -36,4 +36,10 @@ router.get(
 
 router.get("/logout", authControllers.logout);
 
+router.post("/forgot", authControllers.forgotPassword);
+
+router.post("/forgot-verify", authControllers.verifyToken);
+
+router.patch("/reset-password", authControllers.resetPassword);
+
 module.exports = router;
