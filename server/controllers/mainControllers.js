@@ -17,7 +17,8 @@ exports.signupPage = (req, res) => {
 // Get - Login Page
 exports.loginPage = (req, res) => {
   const error = req.flash("error");
-  res.render("login", { error });
+  const success = req.flash("success");
+  res.render("login", { error, success });
 };
 
 // Get - Forgot Page

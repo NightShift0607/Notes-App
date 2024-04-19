@@ -2,7 +2,7 @@
   <div class="form-container">
     <% if (forgot == 'verify') { %>
     <form action="/forgot-verify" method="post">
-      <h1>Token Verification</h1>
+      <h1>Token Verification (Do not Reload or Close the page!)</h1>
       <% if (error != '') { %>
       <div class="error"><%= error %></div>
       <% } %>
@@ -31,7 +31,7 @@
       <div class="input">
         <input
           type="password"
-          name="password"
+          name="confirmPassword"
           minlength="8"
           placeholder="Confirm Password"
           pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"

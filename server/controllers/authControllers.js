@@ -2,6 +2,17 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const saltRounds = 10;
+const sendEmail = require("../utils/email");
+
+async function saveToken(user, passwordResetToken, passwordResetExpires) {
+  await User.findOneAndUpdate(
+    { _id: user._id },
+    {
+      passwordResetToken: passwordResetToken,
+      passwordResetExpires: passwordResetExpires,
+    }
+  );
+}
 
 // Post - Sign Up
 exports.signup = async (req, res, cb) => {
@@ -65,7 +76,7 @@ exports.logout = (req, res, cb) => {
   });
 };
 
-exports.forgotPassword = async (req, res, next) => {
+exports.forgotPassword = async (req, res) => {
   // Getting User based on email posted
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
@@ -73,7 +84,7 @@ exports.forgotPassword = async (req, res, next) => {
     return res.redirect("/forgot");
   }
 
-  // Generating the random reset token saving it to database
+  // Generating the random reset token and saving the encrypted form in database
   const resetToken = crypto.randomBytes(32).toString("hex");
 
   const passwordResetToken = crypto
@@ -81,18 +92,85 @@ exports.forgotPassword = async (req, res, next) => {
     .update(resetToken)
     .digest("hex");
 
-  console.log({ resetToken }, passwordResetToken);
-
   const passwordResetExpires = Date.now() + 10 * 60 * 1000;
-  await User.findOneAndUpdate(
-    { _id: user._id },
-    {
-      passwordResetToken: passwordResetToken,
-      passwordResetExpires: passwordResetExpires,
-    }
-  );
+  await saveToken(user, passwordResetToken, passwordResetExpires);
+
+  // Send it to user's email
+
+  const message = `Forgot Your Password? Copy and paste this verification token given below to reset your password.\n\nVerification Token: ${resetToken}\n\nIf you didn't forget your password, please ignore this email! `;
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "Your password reset token (valid for 10 min)",
+      message,
+    });
+
+    req.flash("forgot", "verify");
+    return res.redirect("/forgot");
+  } catch (error) {
+    console.log(error);
+    passwordResetToken = null;
+    passwordResetToken = null;
+    await saveToken(user, passwordResetToken, passwordResetExpires);
+    return res
+      .status(500)
+      .json({ message: "There was error sending email, Try again later!" });
+  }
 };
 
-exports.verifyToken = (req, res, next) => {};
+exports.verifyToken = async (req, res) => {
+  // Get user based on token
+  const hashedToken = crypto
+    .createHash("sha256")
+    .update(req.body.token)
+    .digest("hex");
 
-exports.resetPassword = (req, res, next) => {};
+  try {
+    const user = await User.findOne({
+      passwordResetToken: hashedToken,
+      passwordResetExpires: { $gte: Date.now() },
+    });
+
+    if (!user) {
+      req.flash("error", "Token is invalid or expired!");
+      req.flash("forgot", "verify");
+      return res.redirect("/forgot");
+    }
+
+    // If token not expired, and there is user, proceed to next route
+    req.flash("forgot", "reset");
+    res.cookie("token", hashedToken);
+    return res.redirect("/forgot");
+  } catch (error) {
+    console.log(error);
+    return res.status(502).json({ message: "Server Error" });
+  }
+};
+
+exports.resetPassword = async (req, res) => {
+  const { password, confirmPassword } = req.body;
+  if (!password || !confirmPassword) {
+    req.flash("error", "Please fill out all fields!");
+    req.flash("forgot", "reset");
+    return res.redirect("/forgot");
+  } else {
+    if (password != confirmPassword) {
+      req.flash("error", "Passwords do not match!");
+      req.flash("forgot", "reset");
+      return res.redirect("/forgot");
+    }
+  }
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
+  await User.findOneAndUpdate(
+    { passwordResetToken: req.cookies.token },
+    {
+      password: hashedPassword,
+      passwordResetToken: null,
+      passwordResetExpires: null,
+    }
+  );
+  res.clearCookie("token");
+  req.flash("success", "Your Password has been reset successfully.");
+  return res.redirect("/signin");
+};

@@ -267,6 +267,17 @@ nav {
   margin: 5px 0;
 }
 
+.success {
+  width: 100%;
+  background-color: #65b367;
+  color: #006d00;
+  font-size: 1.1rem;
+  padding: 5px 0;
+  border-radius: 15px;
+  border: none;
+  margin: 5px 0;
+}
+
 .form-container input {
   width: 100%;
   font-size: 1.1rem;
