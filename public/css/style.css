@@ -409,10 +409,44 @@ s .google-btn > a {
   display: flex;
 }
 
+/* Profile */
+
+.profile {
+  background-color: var(--color-1);
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  padding: 10px;
+  border-radius: 15px;
+  transition: transform 0.4s, top 0.4s;
+}
+
+.open-profile {
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.profile h2 {
+  text-align: center;
+}
+
+.profile-head {
+  position: relative;
+}
+
+.profile-head > i {
+  font-size: 1.6rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+
 /* Sidebar */
 
 .sidebar {
-  width: 30%;
+  width: 25%;
   height: 85vh;
   overflow-y: auto;
   display: flex;
@@ -421,11 +455,42 @@ s .google-btn > a {
   padding: 10px;
 }
 
+.user {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  height: 50px;
+  overflow: hidden;
+  transition: all 0.1s ease-in;
+  border-bottom: 2px solid var(--color-3);
+}
+
+.user a,
+.user p {
+  font-size: 1.4rem;
+}
+
+.user a:hover,
+.user p:hover:not(.user-detail > p) {
+  color: var(--color-5);
+}
+
+#profile {
+  cursor: pointer;
+}
+
+.user:hover {
+  height: 150px;
+}
+
 .user-detail {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   cursor: pointer;
+  font-size: 1.5rem;
+  width: 100%;
 }
 
 .user-detail > img {
@@ -436,6 +501,31 @@ s .google-btn > a {
 
 .user-detail > i {
   font-size: 2rem;
+}
+
+.user:hover .user-detail > i {
+  transform: rotate(180deg);
+}
+
+.search-container {
+  width: 100%;
+}
+
+.search-container > input {
+  width: 100%;
+  padding: 5px 10px;
+  font-size: 1.4rem;
+  text-align: center;
+  margin-top: 2px;
+  background-color: var(--color-2);
+  outline: none;
+  border: none;
+  border-bottom: 2px solid var(--color-3);
+  color: var(--color-4);
+}
+
+.search-container > input::placeholder {
+  color: var(--color-4);
 }
 
 /* Footer */

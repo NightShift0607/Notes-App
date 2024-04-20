@@ -2,9 +2,13 @@
   <div class="user">
     <div class="user-detail">
       <img src="/images/img.jpg" alt="Profile Photo" />
-      <h2>Display Name</h2>
+      <p>Display Name</p>
       <i class="fa-solid fa-angle-down"></i>
     </div>
-    <a href="/logout"><h3>Logout</h3></a>
+    <a href="/logout">Logout</a>
+    <p id="profile">Profile</p>
   </div>
+  <form action="/search" method="post" class="search-container">
+    <input type="text" name="searchTerm" placeholder="Search..." />
+  </form>
 </div>

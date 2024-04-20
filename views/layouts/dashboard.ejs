@@ -15,11 +15,13 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-    <%- include('../partials/dashboardHeader') %>
+    <%- include('../dashboard/profile') %> <%-
+    include('../partials/dashboardHeader') %>
     <main class="dashboard">
       <!-- Sidebar -->
       <%- include('../dashboard/sidebar') %> <%- body %>
     </main>
     <%- include('../partials/footer') %>
+    <script src="/js/show-profile.js"></script>
   </body>
 </html>
