@@ -178,6 +178,18 @@ nav {
   color: var(--color-4);
 }
 
+/* Dashboard Header */
+
+.header {
+  height: 9vh;
+  min-height: 65px;
+}
+
+.date {
+  font-family: "Ink Free", cursive;
+  font-size: 2.2rem;
+}
+
 /* Home Page */
 
 .home {
@@ -389,6 +401,43 @@ s .google-btn > a {
   margin-right: 5px;
 }
 
+/* Dashboard */
+
+.dashboard {
+  background-color: var(--color-2);
+  height: 85vh;
+  display: flex;
+}
+
+/* Sidebar */
+
+.sidebar {
+  width: 30%;
+  height: 85vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  border-right: solid 2px var(--color-3);
+  padding: 10px;
+}
+
+.user-detail {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+}
+
+.user-detail > img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.user-detail > i {
+  font-size: 2rem;
+}
+
 /* Footer */
 
 footer {
@@ -397,6 +446,7 @@ footer {
   align-items: center;
   user-select: none;
   width: 100%;
+  height: 6vh;
 }
 
 .logo {
@@ -421,6 +471,14 @@ footer {
 
   .website-logo {
     font-size: 1.8rem;
+  }
+
+  .header {
+    height: 13vh;
+  }
+
+  .date {
+    font-size: 1.4rem;
   }
 
   .btn {
