@@ -2,12 +2,12 @@
   <div class="form-container">
     <% if (forgot == 'verify') { %>
     <form action="/forgot-verify" method="post">
-      <h1>Token Verification (Do not Reload or Close the page!)</h1>
+      <h1>OTP Verification</h1>
       <% if (error != '') { %>
       <div class="error"><%= error %></div>
       <% } %>
       <div class="input">
-        <input type="text" name="token" placeholder="Mailed Token" />
+        <input type="text" name="token" placeholder="Mailed OPT" />
       </div>
       <button type="submit" class="btn form-btn">Verify</button>
     </form>

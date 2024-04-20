@@ -85,24 +85,26 @@ exports.forgotPassword = async (req, res) => {
   }
 
   // Generating the random reset token and saving the encrypted form in database
-  const resetToken = crypto.randomBytes(32).toString("hex");
+  const resetToken = Math.floor(Math.random() * 899999 + 100000).toString();
 
   const passwordResetToken = crypto
     .createHash("sha256")
     .update(resetToken)
     .digest("hex");
 
+  console.log({ resetToken }, passwordResetToken);
+
   const passwordResetExpires = Date.now() + 10 * 60 * 1000;
   await saveToken(user, passwordResetToken, passwordResetExpires);
 
   // Send it to user's email
 
-  const message = `Forgot Your Password? Copy and paste this verification token given below to reset your password.\n\nVerification Token: ${resetToken}\n\nIf you didn't forget your password, please ignore this email! `;
+  const message = `Forgot Your Password? Copy and paste this OPT given below to reset your password.\n\nOTP (One Time Password): ${resetToken}\n\nIf you didn't forget your password, please ignore this email! `;
 
   try {
     await sendEmail({
       email: user.email,
-      subject: "Your password reset token (valid for 10 min)",
+      subject: "Your password reset OPT (valid for 10 min)",
       message,
     });
 
@@ -133,14 +135,14 @@ exports.verifyToken = async (req, res) => {
     });
 
     if (!user) {
-      req.flash("error", "Token is invalid or expired!");
+      req.flash("error", "OPT is invalid or expired!");
       req.flash("forgot", "verify");
       return res.redirect("/forgot");
     }
 
     // If token not expired, and there is user, proceed to next route
     req.flash("forgot", "reset");
-    res.cookie("token", hashedToken);
+    res.cookie("userId", user._id);
     return res.redirect("/forgot");
   } catch (error) {
     console.log(error);
@@ -163,14 +165,14 @@ exports.resetPassword = async (req, res) => {
   }
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   await User.findOneAndUpdate(
-    { passwordResetToken: req.cookies.token },
+    { _id: req.cookies.userId },
     {
       password: hashedPassword,
       passwordResetToken: null,
       passwordResetExpires: null,
     }
   );
-  res.clearCookie("token");
+  res.clearCookie("userId");
   req.flash("success", "Your Password has been reset successfully.");
   return res.redirect("/signin");
 };
