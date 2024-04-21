@@ -449,18 +449,20 @@ s .google-btn > a {
   width: 25%;
   height: 85vh;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
+  display: block;
   border-right: solid 2px var(--color-3);
   padding: 10px;
+  text-align: center;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 0;
 }
 
 .user {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  height: 50px;
+  display: block;
+  text-align: center;
+  height: 4rem;
   overflow: hidden;
   transition: all 0.1s ease-in;
   border-bottom: 2px solid var(--color-3);
@@ -481,7 +483,7 @@ s .google-btn > a {
 }
 
 .user:hover {
-  height: 150px;
+  height: fit-content;
 }
 
 .user-detail {
@@ -526,6 +528,61 @@ s .google-btn > a {
 
 .search-container > input::placeholder {
   color: var(--color-4);
+}
+
+.new-note {
+  font-size: 1.4rem;
+  border-bottom: 2px solid var(--color-3);
+}
+
+a:hover > .new-note {
+  color: var(--color-5);
+}
+
+.sidebar > h2 {
+  text-decoration: underline;
+}
+
+.notes-container {
+  height: 400px;
+  overflow-y: auto;
+}
+
+.notes-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.notes-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.notes-container::-webkit-scrollbar-thumb {
+  background-color: var(--color-5);
+}
+
+.notes-container > a {
+  display: block;
+}
+
+.note {
+  font-size: 1.4rem;
+}
+
+.note:hover {
+  color: var(--color-5);
+}
+
+.home {
+  height: 85vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.display-name {
+  font-family: "Ink Free", cursive;
+  font-size: 3rem;
 }
 
 /* Footer */
