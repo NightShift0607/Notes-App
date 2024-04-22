@@ -1,31 +1,23 @@
 <div class="sidebar">
   <div class="user">
     <div class="user-detail">
-      <img src="/images/img.jpg" alt="Profile Photo" />
-      <p>Display Name</p>
+      <img src="<%= user.profileImage %>" alt="Profile Photo" />
+      <p><%= user.userName %></p>
       <i class="fa-solid fa-angle-down"></i>
     </div>
     <a href="/logout">Logout</a>
     <p id="profile">Profile</p>
   </div>
-  <form action="/search" method="post" class="search-container">
+  <form action="/dashboard/search" method="post" class="search-container">
     <input type="text" name="searchTerm" placeholder="Search..." />
   </form>
-  <a href="/new-note">
+  <a href="/dashboard/new-note">
     <div class="new-note">New Note +</div>
   </a>
   <h2>Notes</h2>
   <div class="notes-container">
-    <a href="" class="note">Javascript Animations</a>
-    <a href="" class="note">Javascript Animations</a>
-    <a href="" class="note">Javascript Animations</a>
-    <a href="" class="note">Javascript Animations</a>
-    <a href="" class="note">Javascript Animations</a>
-    <a href="" class="note">Javascript Animations</a>
-    <a href="" class="note">Javascript Animations</a>
-    <a href="" class="note">Javascript Animations</a>
-    <a href="" class="note">Javascript Animations</a>
-    <a href="" class="note">Javascript Animations</a>
-    <a href="" class="note">Javascript Animations</a>
+    <% notes.forEach(note => { %>
+    <a href="/dashboard/note/<%= note._id %>" class="note"><%= note.title %></a>
+    <% }) %>
   </div>
 </div>

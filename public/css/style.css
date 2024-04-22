@@ -23,7 +23,7 @@ body {
 }
 
 .main {
-  padding: 10px;
+  /* padding: 10px; */
 }
 
 .container {
@@ -499,6 +499,7 @@ s .google-btn > a {
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .user-detail > i {
@@ -566,6 +567,8 @@ a:hover > .new-note {
 
 .note {
   font-size: 1.4rem;
+  overflow: hidden;
+  height: 3rem;
 }
 
 .note:hover {
@@ -593,7 +596,7 @@ footer {
   align-items: center;
   user-select: none;
   width: 100%;
-  height: 6vh;
+  /* height: 6vh; */
 }
 
 .logo {
