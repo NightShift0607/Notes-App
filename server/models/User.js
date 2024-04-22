@@ -7,6 +7,9 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    googleId: {
+      type: String,
+    },
     firstName: {
       type: String,
       required: true,
@@ -22,7 +25,6 @@ const UserSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
     },
     profileImage: {
       type: String,

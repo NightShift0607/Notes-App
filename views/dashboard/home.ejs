@@ -1,4 +1,15 @@
-<div class="home">
+<style>
+  @media only screen and (max-width: 600px) {
+    .welcome {
+      display: none;
+    }
+
+    .sidebar {
+      width: 100%;
+    }
+  }
+</style>
+<div class="display-area welcome">
   <div class="hero">
     <p class="display-name">Hey <%= user.firstName %> !</p>
     <img src="/images/giphy.gif" alt="hello" />

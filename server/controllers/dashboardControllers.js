@@ -1,6 +1,5 @@
 const dashboardLayout = "../views/layouts/dashboard";
 const Note = require("../models/Notes");
-const mongoose = require("mongoose");
 
 exports.dashboardPage = async (req, res) => {
   try {

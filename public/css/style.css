@@ -22,9 +22,9 @@ body {
   color: var(--color-4);
 }
 
-.main {
-  /* padding: 10px; */
-}
+/* .main {
+  padding: 10px;
+} */
 
 .container {
   margin: 10px 0;
@@ -187,7 +187,7 @@ nav {
 
 .date {
   font-family: "Ink Free", cursive;
-  font-size: 2.2rem;
+  font-size: 2rem;
 }
 
 /* Home Page */
@@ -462,10 +462,12 @@ s .google-btn > a {
 .user {
   display: block;
   text-align: center;
-  height: 4rem;
-  overflow: hidden;
   transition: all 0.1s ease-in;
   border-bottom: 2px solid var(--color-3);
+}
+
+.user-option {
+  display: none;
 }
 
 .user a,
@@ -482,8 +484,8 @@ s .google-btn > a {
   cursor: pointer;
 }
 
-.user:hover {
-  height: fit-content;
+.user:hover .user-option {
+  display: block;
 }
 
 .user-detail {
@@ -545,20 +547,22 @@ a:hover > .new-note {
 }
 
 .notes-container {
-  height: 400px;
+  height: 70%;
   overflow-y: auto;
 }
 
 .notes-container::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
 
 .notes-container::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
+  background-color: var(--color-4);
+  border-radius: 5px;
 }
 
 .notes-container::-webkit-scrollbar-thumb {
   background-color: var(--color-5);
+  border-radius: 5px;
 }
 
 .notes-container > a {
@@ -575,9 +579,12 @@ a:hover > .new-note {
   color: var(--color-5);
 }
 
-.home {
+.display-area {
   height: 85vh;
   width: 100%;
+}
+
+.welcome {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -609,7 +616,7 @@ footer {
 
 /* Media Queries */
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 600px) {
   nav {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
@@ -683,5 +690,25 @@ footer {
 
   .stack {
     margin: 5px 0;
+  }
+
+  .dashboard {
+    height: 80vh;
+  }
+  .sidebar {
+    height: 80vh;
+  }
+  .display-area {
+    height: 80vh;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .date {
+    font-size: 1.4rem;
+  }
+
+  .sidebar {
+    width: 40%;
   }
 }

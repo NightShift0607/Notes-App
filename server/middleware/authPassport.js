@@ -50,15 +50,15 @@ passport.use(
     async function (accessToken, refreshToken, profile, cb) {
       const newUser = {
         userName: profile.displayName,
+        googleId: profile.id,
         firstName: profile.name.givenName,
         lastName: profile.name.familyName,
         email: profile.emails[0].value,
-        password: profile.id,
         profileImage: profile.photos[0].value,
       };
 
       try {
-        let user = await User.findOne({ password: newUser.password });
+        let user = await User.findOne({ googleId: newUser.googleId });
         if (user) {
           cb(null, user);
         } else {

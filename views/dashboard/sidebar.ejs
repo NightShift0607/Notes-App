@@ -5,8 +5,10 @@
       <p><%= user.userName %></p>
       <i class="fa-solid fa-angle-down"></i>
     </div>
-    <a href="/logout">Logout</a>
-    <p id="profile">Profile</p>
+    <div class="user-option">
+      <a href="/logout">Logout</a>
+      <p id="profile">Profile</p>
+    </div>
   </div>
   <form action="/dashboard/search" method="post" class="search-container">
     <input type="text" name="searchTerm" placeholder="Search..." />
