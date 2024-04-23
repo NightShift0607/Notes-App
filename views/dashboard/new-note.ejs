@@ -1,0 +1,19 @@
+<style>
+  @media only screen and (max-width: 600px) {
+    .sidebar {
+      display: none;
+    }
+  }
+</style>
+<div class="display-area newNote">
+  <form action="/add-note" method="post" class="note-form">
+    <input type="text" placeholder="Title" name="title" autofocus />
+    <textarea name="content" placeholder="Content"></textarea>
+    <div class="note-btn">
+      <button type="submit" class="btn">Save</button>
+      <a href="/dashboard">
+        <div class="btn red">Cancel</div>
+      </a>
+    </div>
+  </form>
+</div>

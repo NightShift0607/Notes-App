@@ -446,7 +446,7 @@ s .google-btn > a {
 /* Sidebar */
 
 .sidebar {
-  width: 25%;
+  width: 32%;
   height: 85vh;
   overflow-y: auto;
   display: block;
@@ -579,6 +579,8 @@ a:hover > .new-note {
   color: var(--color-5);
 }
 
+/* Dashboard Home Page */
+
 .display-area {
   height: 85vh;
   width: 100%;
@@ -593,6 +595,51 @@ a:hover > .new-note {
 .display-name {
   font-family: "Ink Free", cursive;
   font-size: 3rem;
+}
+
+/* New Note Page */
+
+.note-form {
+  height: 100%;
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.note-form > input,
+.note-form > textarea {
+  border: none;
+  outline: none;
+  font-size: 1.6rem;
+  padding: 5px;
+  background-color: var(--color-2);
+  color: var(--color-4);
+}
+
+.note-form > input::placeholder,
+.note-form > textarea::placeholder {
+  color: var(--color-4);
+}
+
+.note-form > textarea {
+  height: 100%;
+}
+
+.note-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.note-btn > button {
+  margin-right: 10%;
+}
+
+.red {
+  margin-left: 10%;
+  background-color: var(--color-6);
+  border-color: var(--color-6);
 }
 
 /* Footer */
@@ -616,6 +663,26 @@ footer {
 
 /* Media Queries */
 
+@media only screen and (max-width: 420px) and (min-width: 100px) {
+  .date {
+    font-size: 1rem;
+  }
+
+  .btn {
+    font-size: 0.6rem;
+  }
+}
+
+@media only screen and (max-width: 600px) and (min-width: 420px) {
+  .date {
+    font-size: 1.4rem;
+  }
+
+  .btn {
+    font-size: 0.8rem;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   nav {
     grid-template-columns: 1fr 1fr;
@@ -632,14 +699,6 @@ footer {
 
   .header {
     height: 13vh;
-  }
-
-  .date {
-    font-size: 1.4rem;
-  }
-
-  .btn {
-    font-size: 0.8rem;
   }
 
   .home {
@@ -703,12 +762,12 @@ footer {
   }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 800px) and (min-width: 600px) {
   .date {
     font-size: 1.4rem;
   }
 
   .sidebar {
-    width: 40%;
+    width: 48%;
   }
 }

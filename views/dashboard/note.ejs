@@ -1,0 +1,31 @@
+<style>
+  @media only screen and (max-width: 600px) {
+    .sidebar {
+      display: none;
+    }
+  }
+</style>
+<div class="display-area newNote">
+  <form
+    action="/update-note/<%= note._id %>?_method=PUT"
+    method="post"
+    class="note-form"
+  >
+    <input
+      type="text"
+      placeholder="Title"
+      name="title"
+      autofocus
+      value="<%= note.title %>"
+    />
+    <textarea name="content" placeholder="Content">
+<%= note.content %></textarea
+    >
+    <div class="note-btn">
+      <button type="submit" class="btn">Update</button>
+      <a href="/dashboard/delete/<%= note._id %>?_method=DELETE">
+        <div class="btn red">Delete</div>
+      </a>
+    </div>
+  </form>
+</div>
