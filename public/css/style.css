@@ -629,15 +629,10 @@ a:hover > .new-note {
 .note-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-
-.note-btn > button {
-  margin-right: 10%;
+  justify-content: space-evenly;
 }
 
 .red {
-  margin-left: 10%;
   background-color: var(--color-6);
   border-color: var(--color-6);
 }

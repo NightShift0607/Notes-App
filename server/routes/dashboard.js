@@ -14,5 +14,8 @@ router.get(
   checkAuthProceed,
   dashboardControllers.viewNotePage
 );
+router.post("/add-note", checkAuthProceed, dashboardControllers.createNewNote);
+router.put("/edit-note/:id", checkAuthProceed, dashboardControllers.editNote);
+router.get("/delete/:id", checkAuthProceed, dashboardControllers.deleteNote);
 
 module.exports = router;

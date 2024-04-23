@@ -7,7 +7,7 @@
 </style>
 <div class="display-area newNote">
   <form
-    action="/update-note/<%= note._id %>?_method=PUT"
+    action="/edit-note/<%= note._id %>?_method=PUT"
     method="post"
     class="note-form"
   >
@@ -22,8 +22,9 @@
 <%= note.content %></textarea
     >
     <div class="note-btn">
+      <p>Last Updated At: <%= note.updatedAt.toLocaleString() %></p>
       <button type="submit" class="btn">Update</button>
-      <a href="/dashboard/delete/<%= note._id %>?_method=DELETE">
+      <a href="/delete/<%= note._id %>">
         <div class="btn red">Delete</div>
       </a>
     </div>
