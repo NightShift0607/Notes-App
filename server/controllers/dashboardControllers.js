@@ -88,3 +88,17 @@ exports.deleteNote = async (req, res) => {
     console.log(error);
   }
 };
+
+// Search Note
+exports.searchNotes = async (req, res) => {
+  let searchTerm = req.params.term;
+  const searchNoSpecialChars = searchTerm.replace(/[^a-zA-Z0-9 ]/g, "");
+  try {
+    const result = await Note.find({
+      title: { $regex: new RegExp(searchNoSpecialChars, "i") },
+    }).where({ user: req.user });
+    return res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+};
