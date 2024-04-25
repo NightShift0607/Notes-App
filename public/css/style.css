@@ -687,6 +687,12 @@ footer {
   align-items: center;
 }
 
+/* Route Helper */
+
+.activa {
+  color: var(--color-5);
+}
+
 /* Media Queries */
 
 @media only screen and (max-width: 420px) and (min-width: 100px) {

@@ -12,6 +12,7 @@ const mainRoutes = require("./server/routes/index");
 const authRoutes = require("./server/routes/auth");
 const dashboardRoutes = require("./server/routes/dashboard");
 const connectDB = require("./server/config/db");
+const { isActiveRoute } = require("./server/helper/routeHelpers");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -44,6 +45,8 @@ connectDB();
 app.use(expressLayout);
 app.set("layout", "./layouts/main");
 app.set("view engine", "ejs");
+
+app.locals.isActiveRoute = isActiveRoute;
 
 // Routing
 app.use("/", mainRoutes);

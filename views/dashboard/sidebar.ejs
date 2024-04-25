@@ -14,12 +14,20 @@
     <input type="text" id="searchTerm" placeholder="Search..." />
   </form>
   <a href="/dashboard/new-note">
-    <div class="new-note">New Note +</div>
+    <div
+      class="new-note <%= isActiveRoute('/dashboard/new-note',currentRoute) %>"
+    >
+      New Note +
+    </div>
   </a>
   <h2>Notes</h2>
   <div class="notes-container">
     <% notes.forEach(note => { %>
-    <a href="/dashboard/note/<%= note._id %>" class="note"><%= note.title %></a>
+    <a
+      href="/dashboard/note/<%= note._id %>"
+      class="note <%= isActiveRoute(`/dashboard/note/${note._id}`,currentRoute) %>"
+      ><%= note.title %></a
+    >
     <% }) %>
   </div>
 </div>

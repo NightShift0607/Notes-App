@@ -23,6 +23,7 @@ exports.dashboardPage = async (req, res) => {
     user,
     notes,
     error,
+    currentRoute: "/dashboard",
   });
 };
 
@@ -35,6 +36,7 @@ exports.newNotePage = async (req, res) => {
     user,
     notes,
     error,
+    currentRoute: "/dashboard/new-note",
   });
 };
 
@@ -51,6 +53,7 @@ exports.viewNotePage = async (req, res) => {
       notes,
       note,
       error,
+      currentRoute: `/dashboard/note/${noteId}`,
     });
   } catch (error) {
     console.log(error);

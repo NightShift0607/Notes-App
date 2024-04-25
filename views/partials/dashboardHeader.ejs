@@ -2,8 +2,16 @@
   <nav>
     <h2 class="website-logo">NoteNest</h2>
     <div class="nav-el-container">
-      <a href="/dashboard" class="nav-el">Dashboard</a>
-      <a href="/about" class="nav-el">About</a>
+      <a
+        href="/dashboard"
+        class="nav-el <%= isActiveRoute('/dashboard',currentRoute) %>"
+        >Dashboard</a
+      >
+      <a
+        href="/about"
+        class="nav-el <%= isActiveRoute('/about',currentRoute) %>"
+        >About</a
+      >
     </div>
     <div class="login-container date"><%= new Date().toDateString() %></div>
   </nav>
