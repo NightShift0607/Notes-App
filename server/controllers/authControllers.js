@@ -92,8 +92,6 @@ exports.forgotPassword = async (req, res) => {
     .update(resetToken)
     .digest("hex");
 
-  console.log({ resetToken }, passwordResetToken);
-
   const passwordResetExpires = Date.now() + 10 * 60 * 1000;
   await saveToken(user, passwordResetToken, passwordResetExpires);
 
@@ -112,9 +110,7 @@ exports.forgotPassword = async (req, res) => {
     return res.redirect("/forgot");
   } catch (error) {
     console.log(error);
-    passwordResetToken = null;
-    passwordResetToken = null;
-    await saveToken(user, passwordResetToken, passwordResetExpires);
+    await saveToken(user, null, null);
     return res
       .status(500)
       .json({ message: "There was error sending email, Try again later!" });
