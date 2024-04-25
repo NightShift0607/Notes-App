@@ -1,5 +1,9 @@
+const bcrypt = require("bcrypt");
 const dashboardLayout = "../views/layouts/dashboard";
 const Note = require("../models/Notes");
+const User = require("../models/User");
+const fs = require("fs");
+const saltRounds = 10;
 
 async function getNotes(user) {
   try {
@@ -13,22 +17,31 @@ async function getNotes(user) {
 // Dashboard page renderization
 exports.dashboardPage = async (req, res) => {
   const { notes, user } = await getNotes(req.user);
-  return res.render("dashboard/home", { layout: dashboardLayout, user, notes });
+  const error = req.flash("error");
+  return res.render("dashboard/home", {
+    layout: dashboardLayout,
+    user,
+    notes,
+    error,
+  });
 };
 
 // Add note form rendering
 exports.newNotePage = async (req, res) => {
   const { notes, user } = await getNotes(req.user);
+  const error = req.flash("error");
   return res.render("dashboard/new-note", {
     layout: dashboardLayout,
     user,
     notes,
+    error,
   });
 };
 
 // View Note
 exports.viewNotePage = async (req, res) => {
   const { notes, user } = await getNotes(req.user);
+  const error = req.flash("error");
   const noteId = req.params.id;
   try {
     const note = await Note.findById(noteId).where({ user: user });
@@ -37,6 +50,7 @@ exports.viewNotePage = async (req, res) => {
       user,
       notes,
       note,
+      error,
     });
   } catch (error) {
     console.log(error);
@@ -101,4 +115,55 @@ exports.searchNotes = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+// Update User Profile
+exports.updateProfile = async (req, res) => {
+  const { username, password, confirmPassword } = req.body;
+  const file = req.file;
+  const user = req.user;
+  if (file) {
+    try {
+      // saving old image name to delete it
+      const oldFile = `./public${user.profileImage}`;
+      await User.findByIdAndUpdate(user._id, {
+        profileImage: `/uploads/${file.filename}`,
+      });
+      // To delete the old image
+      fs.unlink(oldFile, (err) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+      });
+    } catch (error) {
+      console.log("Error Uploading Image", error.message);
+      req.flash("error", "Error Uploading Image");
+    }
+  }
+  if (username) {
+    try {
+      await User.findByIdAndUpdate(user._id, {
+        userName: username,
+      });
+    } catch (error) {
+      console.log("Error Updating Display Name", error.message);
+      req.flash("error", "Error Updating Display Name");
+    }
+  }
+  if (password && confirmPassword) {
+    if (password === confirmPassword) {
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+      try {
+        await User.findByIdAndUpdate(user._id, {
+          password: hashedPassword,
+        });
+      } catch (error) {
+        console.log("Error Uploading Image", error.message);
+      }
+    } else {
+      req.flash("error", "Please Enter Correct Password");
+    }
+  }
+  return res.redirect("/dashboard");
 };

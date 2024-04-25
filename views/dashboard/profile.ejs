@@ -1,42 +1,61 @@
 <div class="profile">
-<div class="profile-head">
-  <h2>User Profile</h2>
-  <i class="fa-solid fa-xmark" id="profile-close"></i>
-</div>
+  <div class="profile-head">
+    <h2>Update User Profile</h2>
+    <i class="fa-solid fa-xmark" id="profile-close"></i>
+  </div>
+  <% if (error != '') { %>
+  <div class="error"><%= error %></div>
+  <% } %>
   <div class="form-container">
-    <form action="/signup" method="post" enctype="multipart/form-data">
-        <div class="input">
+    <form
+      action="/update-profile?_method=PATCH"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <div class="input image-update">
+        <img src="<%= user.profileImage %>" alt="Profile Image" />
+        <label for="profile-image"
+          ><i class="fa-solid fa-upload upload"></i
+        ></label>
         <input
-            type="text"
-            name="username"
-            placeholder="Display Name"
-            minlength="6"
+          type="file"
+          id="profile-image"
+          accept=".jpg, .jpeg, .png"
+          name="image"
+          hidden
         />
-        </div>
-        <div class="input full-name">
-        <input type="text" name="fName" placeholder="First Name" />
-        <input type="text" name="lName" placeholder="Last Name" />
-        </div>
-        <div class="input">
-        <input type="email" name="email" placeholder="Email" />
-        </div>
-        <div class="input">
+      </div>
+      <div class="input">
         <input
-            type="password"
-            name="password"
-            minlength="8"
-            placeholder="Password"
-            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
-            title="Minimum Length of 8 characters. Please include at least 1 uppercase character, 1 lowercase character, and 1 number."
+          type="text"
+          name="username"
+          placeholder="Display Name: <%= user.userName %>"
+          minlength="6"
+        />
+      </div>
+      <div class="input">
+        <input
+          type="password"
+          name="password"
+          minlength="8"
+          placeholder="Change Password"
+          pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+          title="Minimum Length of 8 characters. Please include at least 1 uppercase character, 1 lowercase character, and 1 number."
         />
         <i class="fa-solid fa-eye eye"></i>
-        </div>
-        <div class="input image-file">
-        <label for="profile-image">Profile Image</label>
-        <input type="file" id="profile-image" name="image" hidden />
-        </div>
-        <button type="submit" class="btn form-btn">Update</button>
-        </a>
+      </div>
+      <div class="input">
+        <input
+          type="password"
+          name="confirmPassword"
+          minlength="8"
+          placeholder="Confirm New Password"
+          pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+          title="Minimum Length of 8 characters. Please include at least 1 uppercase character, 1 lowercase character, and 1 number."
+        />
+        <i class="fa-solid fa-eye eye"></i>
+      </div>
+      <button type="submit" class="btn form-btn">Update</button>
     </form>
   </div>
 </div>
