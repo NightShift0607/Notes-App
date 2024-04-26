@@ -716,6 +716,16 @@ footer {
 }
 
 @media only screen and (max-width: 600px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .header {
+    height: fit-content;
+  }
+
   nav {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
@@ -727,10 +737,6 @@ footer {
 
   .website-logo {
     font-size: 1.8rem;
-  }
-
-  .header {
-    height: 13vh;
   }
 
   .home {
@@ -784,13 +790,13 @@ footer {
   }
 
   .dashboard {
-    height: 80vh;
+    height: 100%;
   }
   .sidebar {
-    height: 80vh;
+    height: 100%;
   }
   .display-area {
-    height: 80vh;
+    height: 100%;
   }
 }
 
