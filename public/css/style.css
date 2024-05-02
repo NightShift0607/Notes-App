@@ -317,6 +317,10 @@ nav {
   color: var(--color-4);
 }
 
+.form-container input:-webkit-autofill {
+  transition: background-color 6000s, color 6000s;
+}
+
 .full-name {
   display: flex;
   justify-content: space-between;
